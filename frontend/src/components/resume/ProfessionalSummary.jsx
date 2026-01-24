@@ -49,7 +49,7 @@ function ProfessionalSummary({ formData, setFormData, setCurrentStep }) {
     try {
       setAiLoading(true);
 
-      const years = Number(formData.experience) || 0;
+      const years = Number(formData.website) || 0;
 
       const skills = [
         ...(formData.backendSkills || []),
