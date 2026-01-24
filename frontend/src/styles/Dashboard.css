@@ -3,7 +3,7 @@
 }
 
 .dashboard-title {
-  font-size: 18px;
+  font-size: 25px;
   margin-bottom: 30px;
 }
 
@@ -54,14 +54,7 @@
 }
 /* TEXT */
 .dashboard-card p {
-  font-size: 15px;
-  font-weight: 500;
-  color: #1f2937;
-}
-
-/* TEXT */
-.dashboard-card p {
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
   color: #1f2937;
 }
@@ -80,7 +73,7 @@
 /* MODAL BOX */
 .modal-box {
   background: #fff;
-  width: 420px;
+  width: 450px;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -88,10 +81,11 @@
 
 .modal-box h3 {
   margin: 0 0 6px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .modal-box p {
-  font-size: 14px;
+  font-size: 15px;
   color: #666;
   margin-bottom: 12px;
 }
@@ -99,9 +93,10 @@
 .modal-box input {
   width: 90%;
   padding: 10px;
+  font-size: 15px;
   border-radius: 6px;
   border: 1px solid #ccc;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 /* ACTION BUTTONS */
@@ -117,6 +112,7 @@
   padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .create-btn {
@@ -126,6 +122,7 @@
   padding: 8px 14px;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .create-btn:disabled {

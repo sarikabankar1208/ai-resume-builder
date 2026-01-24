@@ -26,7 +26,7 @@ function Login() {
 
   return (
     <div className="auth-card">
-      <h2>Login</h2>
+      <h1>Login</h1>
 
       {error && <p className="error">{error}</p>}
 

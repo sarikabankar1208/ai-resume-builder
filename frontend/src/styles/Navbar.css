@@ -8,25 +8,9 @@
 
 .navbar-title {
   color: #ffffff;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 40px;
+  font-weight: 500;
 }
-
-.nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 32px; /* 👈 THIS increases space between Login & Register */
-}
-
-.nav-link {
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 16px;
-  padding: 8px 20px;
-  border: 1px solid #ffffff;
-  border-radius: 6px;
-}
-
 
 .logout-btn {
   background: transparent;
@@ -37,16 +21,13 @@
   cursor: pointer;
 }
 
-.logo{
-  color: white;
-  font-size: 1.8rem;
-}
 
 .auth-buttons {
   display: flex;
-  gap: 14px;              /* spacing between buttons */
+  gap: 40px;              /* spacing between buttons */
   align-items: center;
 }
+
 
 .auth-btn {
   text-decoration: none;
@@ -55,10 +36,11 @@
   border: 1.5px solid white;
   padding: 8px 18px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 22px;
   cursor: pointer;
   transition: all 0.25s ease;
 }
+
 
 .auth-btn:hover {
   background: white;

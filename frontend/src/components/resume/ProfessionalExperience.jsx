@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useSearchParams } from "react-router-dom";
+import { enhanceJobDescription } from "../../services/aiSummaryService"; // ✅ ADD THIS IMPORT
 
 function ProfessionalExperience({
   formData,
@@ -12,6 +13,11 @@ function ProfessionalExperience({
   // ✅ Toast state
   const [showToast, setShowToast] = useState(false);
   const [toastType, setToastType] = useState(""); // success | error
+  const [toastMessage, setToastMessage] = useState(""); // ✅ ADD THIS
+
+  // ✅ AI Loading state
+  const [aiLoading, setAiLoading] = useState(false); // ✅ ADD THIS
+  const [enhancingIndex, setEnhancingIndex] = useState(null); // ✅ ADD THIS
 
   // ✅ Get resumeId ONCE (correct hook usage)
   const [searchParams] = useSearchParams();
@@ -58,6 +64,7 @@ function ProfessionalExperience({
 
       if (authError || !authData.user || !resumeId) {
         setToastType("error");
+        setToastMessage("❌ Failed to save experience");
         setShowToast(true);
         setTimeout(() => setShowToast(false), 2000);
         return;
@@ -66,20 +73,91 @@ function ProfessionalExperience({
       const { error } = await supabase
         .from("resumes")
         .update({
-          experiences: formData.experiences, // ✅ CORRECT COLUMN
+          experience: formData.experiences, // ✅ CORRECT COLUMN
           updated_at: new Date(),
         })
         .eq("id", resumeId);
 
-      setToastType(error ? "error" : "success");
+      if (error) {
+        setToastType("error");
+        setToastMessage("❌ Failed to save experience");
+      } else {
+        setToastType("success");
+        setToastMessage("✅ Experience saved successfully");
+      }
+
       setShowToast(true);
       setTimeout(() => setShowToast(false), 2000);
 
     } catch (err) {
       console.error(err);
       setToastType("error");
+      setToastMessage("❌ Failed to save experience");
       setShowToast(true);
       setTimeout(() => setShowToast(false), 2000);
+    }
+  };
+
+  // ✅ NEW: ENHANCE JOB DESCRIPTION WITH AI
+  const handleEnhanceDescription = async (index) => {
+    try {
+      setAiLoading(true);
+      setEnhancingIndex(index);
+
+      const exp = experiences[index];
+
+      // Validate required fields
+      if (!exp.role || !exp.company) {
+        setToastMessage("⚠️ Please fill in Job Title and Company Name first");
+        setToastType("error");
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 3000);
+        setAiLoading(false);
+        setEnhancingIndex(null);
+        return;
+      }
+
+      // Build payload - map field names correctly
+      const payload = {
+        companyName: exp.company,
+        jobTitle: exp.role,
+        startDate: exp.startDate || "",
+        endDate: exp.endDate || "",
+        isCurrent: exp.current || false,
+        jobDescription: exp.description || ""
+      };
+
+      console.log("🤖 Enhancing job description:", payload);
+
+      const result = await enhanceJobDescription(payload);
+
+      if (!result || result.status !== "success") {
+        throw new Error("Enhancement failed");
+      }
+
+      // ✅ Update the description with enhanced version
+      const updatedExperiences = [...experiences];
+      updatedExperiences[index].description = result.enhanced_description;
+
+      setFormData({
+        ...formData,
+        experiences: updatedExperiences
+      });
+
+      setToastMessage("✨ Job description enhanced successfully!");
+      setToastType("success");
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+
+    } catch (error) {
+      console.error("Enhancement error:", error);
+      setToastMessage("❌ Failed to enhance description");
+      setToastType("error");
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    } finally {
+      setAiLoading(false);
+      setEnhancingIndex(null);
     }
   };
 
@@ -183,6 +261,30 @@ function ProfessionalExperience({
               updateExperience(index, "description", e.target.value)
             }
           />
+
+          {/* ✅ NEW: Enhance Button */}
+          <button
+            onClick={() => handleEnhanceDescription(index)}
+            disabled={aiLoading}
+            className="enhance-btn"
+            style={{
+              backgroundColor: "#6366f1",
+              color: "white",
+              padding: "10px 16px",
+              border: "none",
+              borderRadius: "6px",
+              cursor: aiLoading ? "not-allowed" : "pointer",
+              opacity: aiLoading && enhancingIndex !== index ? 0.5 : 1,
+              marginTop: "10px",
+              marginRight: "10px",
+              fontWeight: "500",
+              fontSize: "14px",
+              transition: "all 0.3s ease"
+            }}
+            title="Use AI to enhance your job description"
+          >
+            {enhancingIndex === index && aiLoading ? "✨ Enhancing..." : "✨ Enhance with AI"}
+          </button>
         </div>
       ))}
 
@@ -193,9 +295,7 @@ function ProfessionalExperience({
       {/* ✅ TOAST */}
       {showToast && (
         <div className={`toast ${toastType}`}>
-          {toastType === "success"
-            ? "✅ Experience saved successfully"
-            : "❌ Failed to save experience"}
+          {toastMessage}
         </div>
       )}
     </>
@@ -203,4 +303,3 @@ function ProfessionalExperience({
 }
 
 export default ProfessionalExperience;
-

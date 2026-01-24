@@ -1,26 +1,36 @@
 .home-container {
-  height: calc(100vh - 80px);
+  height: calc(80vh - 80px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 20px;
-}
 
+}
 .home-container h1 {
-  font-size: 36px;
+  font-size: 50px;
   margin-bottom: 16px;
 }
 
 .home-container p {
-  font-size: 18px;
-  max-width: 600px;
+  font-size: 20px;
+  max-width: 800px;
   margin-bottom: 30px;
 }
 
+
 .primary-btn {
+  margin-top: 50px;
   padding: 12px 28px;
-  font-size: 16px;
+  font-size: 20px;
+  border-radius: 6px;
+  border-color:black;   /* purple accent */
+  color: black;
   cursor: pointer;
+}
+
+.primary-btn:hover {
+  background:black;
+  color: white;
 }

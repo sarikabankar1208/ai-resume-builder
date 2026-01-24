@@ -210,3 +210,4 @@ function Education({ formData, setFormData, setCurrentStep }) {
 }
 
 export default Education;
+

@@ -45,7 +45,7 @@ function ProfessionalSummary({ formData, setFormData, setCurrentStep }) {
   };
 
   /* ---------------- AI GENERATE ---------------- */
-  const handleAIGenerate = async () => {
+    const handleAIGenerate = async () => {
     try {
       setAiLoading(true);
 
@@ -55,8 +55,13 @@ function ProfessionalSummary({ formData, setFormData, setCurrentStep }) {
         ...(formData.backendSkills || []),
         ...(formData.frontendSkills || []),
         ...(formData.cloudSkills || []),
-        ...(formData.databaseSkills || [])
+        ...(formData.databaseSkills || []),
+        ...(formData.skills || []),  // ✅ ADD THIS if you have a generic skills field
+        ...(formData.otherSkills || [])  // ✅ ADD THIS if exists
       ];
+
+      console.log("🛠️ All skills being sent:", skills);  // Debug
+
 
       const experienceLevel =
         years < 1 ? "Entry-level" :
@@ -67,9 +72,12 @@ function ProfessionalSummary({ formData, setFormData, setCurrentStep }) {
       const payload = {
         years,
         experienceLevel,
-        skills,
+        skills,  // Now includes all skills
+        jobTitle: formData.profession || "",  // ✅ CHANGE: jobTitle → profession
         roughSummary: formData.summary?.trim() || ""
       };
+
+       console.log("🔍 Payload being sent to AI:", payload);
 
       const result = await generateSummary(payload);
 
@@ -83,9 +91,15 @@ function ProfessionalSummary({ formData, setFormData, setCurrentStep }) {
         summary: result.optimized_resume
       });
 
+      setToastType("success");
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+
     } catch (error) {
       console.error(error);
-      alert("AI generation failed");
+      setToastType("error");
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
     } finally {
       setAiLoading(false);
     }
@@ -129,6 +143,11 @@ function ProfessionalSummary({ formData, setFormData, setCurrentStep }) {
           setFormData({ ...formData, summary: e.target.value })
         }
       />
+
+      {/* ---------- TIP ---------- */}
+      <div className="tip-text-below">
+        <strong>Tip:</strong> Keep it concise (3-4 sentences) and focus on your most relevant achievements and skills.
+      </div>
 
       {/* ---------- SAVE ---------- */}
       <button className="save-btn" onClick={saveProfessionalSummary}>

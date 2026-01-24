@@ -28,6 +28,12 @@
   margin-bottom: 10px;
   text-transform: uppercase; /* 🔥 NAME ALWAYS UPPERCASE */
 }
+.preview-profession{
+  text-align: center;
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
 
 /* Contact details row */
 .preview-contact {
@@ -93,17 +99,43 @@
   color: black;
 }
 
+.preview-exp-dates {
+  font-size: 12px;
+  color: #666;
+  font-weight: normal;
+  font-style: italic;
+}
+
 .preview-exp-company {
   margin-top: 10px;
   font-size: 14px;
   margin-bottom: 6px;
-  color: black;
+  color: #666;
 }
 
+/* ✅ NEW: Bullet Points Styling */
+.preview-exp-bullets {
+  list-style-type: disc;
+  margin: 10px 0 12px 20px;
+  padding-left: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.preview-exp-bullets li {
+  margin-bottom: 6px;
+  text-align: justify;
+  color: #374151;
+}
+
+.preview-exp-bullets li::marker {
+  color: #666;
+}
+
+/* ✅ HIDE old description paragraph if it exists */
 .preview-exp-desc {
-  font-size: 14px;
-  line-height: 1.5;
-  color: black;
+  display: none;
 }
 
 /* ===== EDUCATION PREVIEW ===== */

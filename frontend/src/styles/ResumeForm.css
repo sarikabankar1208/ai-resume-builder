@@ -1,9 +1,9 @@
 /* ======================================================
-   RESUME FORM STYLES (LEFT PANEL)
-   Applies to: PersonalInfo, Summary, Experience, Skills
+   RESUME BUILDER – MAIN PAGE LAYOUT
+   Applies to: Entire Resume Builder Screen
 ====================================================== */
 
-/* Page wrapper */
+/* Page wrapper for entire resume builder page*/
 .resume-builder-page {
   padding: 30px 40px;
   margin-left: 5rem;
@@ -19,7 +19,7 @@
   font-weight: 600;
 }
 
-/* Two-column layout */
+/* Two-column layout: Form (left) + Preview (right) */
 .resume-builder-layout {
   display: grid;
   grid-template-columns: 500px 1fr;
@@ -27,21 +27,20 @@
   align-items: flex-start;
 }
 
-/* Left form container */
+/* Left form container (wraps all sections) */
 .resume-form {
   background: #ffffff;
   border-radius: 10px;
-  padding-left : 15px;
-  padding-right : 15px;
+  padding: 10px 15px;
+  margin-top: 45px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.16);
-  padding-top : 10px;
-  padding-bottom : 10px;
-  margin-top:45px;
 }
 
-/* ================= FORM TOOLBAR ================= */
+/* ======================================================
+   FORM TOOLBAR (Top controls)
+   Component: Form Toolbar (Template / Accent / Navigation)
+====================================================== */
 
-/* Top toolbar (Template, Accent, Navigation) */
 .form-toolbar {
   display: flex;
   align-items: center;
@@ -68,21 +67,25 @@
   flex: 1;
 }
 
-/* Navigation buttons */
+/* Navigation buttons (Next / Back) */
 .next-btn {
   background: none;
   border: none;
   color: #4f46e5;
   font-weight: 600;
+  font-size: 15px;
   cursor: pointer;
 }
 
-.next-btn:disabled {
+.next-btn:disabled,
+.next-btn.disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-/* ================= FORM CONTENT ================= */
+* ======================================================
+   COMMON FORM CONTENT (Shared by all sections)
+====================================================== */
 
 /* Section title */
 .form-header h2 {
@@ -117,7 +120,7 @@
   outline: none;
 }
 
-/* Save button */
+/* Save / Submit button */
 .save-btn {
   margin-top: 20px;
   background: #22c55e;
@@ -129,38 +132,307 @@
   cursor: pointer;
 }
 
-/* ================= SKILLS FORM ================= */
+* ======================================================
+   SECTION 1: PERSONAL INFORMATION
+   (Uses common form styles only)
+====================================================== */
 
+/* No additional custom styles required */
+
+/* ======================================================
+   SECTION 2: SKILLS (Overrides Common Styles)
+====================================================== */
+
+/* ---------- Skills Input Row ---------- */
 .skills-input-row {
   display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
+/* Override common input style ONLY for skills */
+.skills-input-row input {
+  flex: 1;
+  width: 70%;
+  padding: 14px 16px;          /* overrides common padding */
+  border-radius: 12px;         /* overrides common radius */
+  border: 2px solid #3b82f6;   /* overrides common border */
+  font-size: 14px;
+  background: #ffffff;
+}
+
+/* Focus state (more specific than common) */
+.skills-input-row input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  outline: none;
+}
+
+/* Placeholder color */
+.skills-input-row input::placeholder {
+  color: #9ca3af;
+}
+
+/* ---------- Add Skill Button ---------- */
 .add-skill-btn {
   background: #2563eb;
-  color: #fff;
+  color: #ffffff;
   border: none;
-  padding: 10px 16px;
-  border-radius: 8px;
+  padding: 14px 22px;
+  border-radius: 12px;
   font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
+  white-space: nowrap;
+  margin-left: 10px;
 }
 
+.add-skill-btn:hover {
+  background: #1d4ed8;
+}
+
+.add-skill-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ---------- Empty State ---------- */
+.skills-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6b7280;
+}
+
+.skills-empty-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  opacity: 0.6;
+}
+
+.skills-empty-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.skills-empty-sub {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* ---------- Skill Tags ---------- */
 .skills-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 16px;
 }
 
 .skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: #e0e7ff;
   color: #1d4ed8;
   padding: 6px 12px;
   border-radius: 999px;
   font-size: 13px;
 }
-/* ---------- FLOATING PANEL ---------- */
+
+/* Remove skill button */
+.skill-tag .btn-x {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #1d4ed8;
+  opacity: 0.7;
+}
+
+.skill-tag .btn-x:hover {
+  opacity: 1;
+}
+
+/* ---------- Tip Box (Skills only) ---------- */
+.tip-text-below {
+  background-color: #f1f7ff;
+  color: #1e40af;
+  padding: 16px 18px;
+  border-radius: 12px;
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ======================================================
+   SECTION 3: PROFESSIONAL EXPERIENCE
+====================================================== */
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.add-exp-btn {
+  background: #dcfce7;
+  color: #16a34a;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Empty experience state */
+.experience-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+}
+
+.experience-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+
+.empty-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.empty-sub {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* Experience card */
+.experience-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.experience-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Delete experience button */
+.delete-exp-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #ef4444;
+}
+
+.delete-exp-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Experience input layout */
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.input-text {
+  border-radius: 8px;
+  height: 22px;
+  padding: 5px;
+  font-size: 1rem;
+  border-color: #eaedf2;
+}
+
+/* Checkbox row */
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.experience-card textarea {
+  width: 95%;
+  min-height: 80px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+}
+/* ======================================================
+   SECTION 4: EDUCATION
+   (Uses common form styles only)
+====================================================== */
+
+/* No additional custom styles required */
+
+/* ======================================================
+   SECTION 5: PROJECTS
+   (Uses common form styles + experience-like cards)
+====================================================== */
+
+/* Reuses experience-card styles */
+
+/* ======================================================
+   SECTION 6: PROFESSIONAL SUMMARY
+====================================================== */
+
+/* Tip / helper message */
+
+/* Summary header */
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+/* Summary textarea */
+.summary-textarea {
+  width: 90%;
+  min-height: 180px;
+  padding-left: 16px;
+  padding-right: 28px;
+  font-size: 14px;
+  line-height: 1.6;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  resize: none;
+}
+
+.summary-textarea::placeholder {
+  color: #9ca3af;
+  white-space: pre-wrap;
+}
+
+/* AI generate button */
+.ai-btn {
+  background: #f3e8ff;
+  color: #7c3aed;
+  padding: 8px 14px;
+  border-radius: 70px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid #7c3aed;
+  margin-top: 35px;
+}
+
+/* ======================================================
+   FLOATING PANELS / OVERLAYS
+   Component: Template / Accent Selector Panel
+====================================================== */
+
 .panel-overlay {
   position: absolute;
   inset: 0;
@@ -195,234 +467,25 @@
   background: #f3f4f6;
 }
 
-/* ---------- ACCENT COLORS ---------- */
-.accent-row {
-  display: flex;
-  gap: 12px;
-}
+/* ======================================================
+   RESUME PREVIEW (Right Panel)
+====================================================== */
 
-.accent-circle {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid transparent;
-}
-
-.accent-circle.blue {
-  background: #2563eb;
-}
-.accent-circle.green {
-  background: #16a34a;
-}
-.accent-circle.purple {
-  background: #7c3aed;
-}
-.accent-circle.orange {
-  background: #ea580c;
-}
-.accent-circle.gray {
-  background: #374151;
-}
-
-/* ---------- ACCENTS (NAME + LINE) ---------- */
-.resume-preview-inner.blue h1,
-.resume-preview-inner.blue hr {
-  color: #2563eb;
-  border-color: #2563eb;
-}
-
-.resume-preview-inner.green h1,
-.resume-preview-inner.green hr {
-  color: #16a34a;
-  border-color: #16a34a;
-}
-
-.resume-preview-inner.purple h1,
-.resume-preview-inner.purple hr {
-  color: #7c3aed;
-  border-color: #7c3aed;
-}
-
-.resume-preview-inner.orange h1,
-.resume-preview-inner.orange hr {
-  color: #ea580c;
-  border-color: #ea580c;
-}
-
-.resume-preview-inner.gray h1,
-.resume-preview-inner.gray hr {
-  color: #374151;
-  border-color: #374151;
-}
-
-/* ---------- PREVIEW BASE ---------- */
 .resume-preview-inner {
   padding: 24px;
   border-radius: 12px;
   background: #ffffff;
 }
 
-/* ================= Professional summary form ================= */
-.tip-text {
-  margin-top: 14px;
-  text-align: left;
-  font-size: 15px;
-  color: #070707;
-}
+/* ======================================================
+   COMMON ICON BUTTON
+====================================================== */
 
-.summary-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 16px;
-}
-
-.summary-textarea {
-  width: 90%;
-  min-height: 180px;
-  padding-left: 16px;
-  padding-right: 28px;
-  font-size: 14px;
-  line-height: 1.6;
-  border-radius: 12px;
-  border: 1px solid #d1d5db;
-  resize: none;
-}
-
-.summary-textarea::placeholder {
-  color: #9ca3af;
-  white-space: pre-wrap; 
-}
-
-
-.ai-btn {
-  background: #f3e8ff;        /* Lavender */
-  color: #7c3aed;             /* Purple text */
-  padding: 8px 14px;
-  border-radius: 70px;
-  font-weight: 700;
-  cursor: pointer;
-
-  border: 2px solid #7c3aed;  /* Dark purple border */
-  margin-top: 35px;
-}
-
-
-
-/* ================= Professional experience form ================= */
-
-.experience-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 32px;
-}
-
-.add-exp-btn {
-  background: #dcfce7;
-  color: #16a34a;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.experience-empty {
-  text-align: center;
-  padding: 60px 20px;
-  color: #6b7280;
-}
-
-.experience-card {
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.experience-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-.input-text
-{
-  border-radius: 8px;
-  height: 22px;
-  padding: 5px;
-  font-size: 1rem;
-  border-color: #eaedf2;
-}
-
-.checkbox-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-.experience-card textarea {
-  width: 95%;
-  min-height: 80px;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-}
-
-.experience-icon {
-  font-size: 48px;
-  margin-bottom: 12px;
-  opacity: 0.6;
-}
-
-.empty-title {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.empty-sub {
-  font-size: 14px;
-  color: #9ca3af;
-}
-
-.next-btn.disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* ===== DELETE EXPERIENCE ===== */
-
-.experience-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.delete-exp-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: #ef4444;
-}
-
-.delete-exp-btn:hover {
-  transform: scale(1.1);
-}
-
-.btn-x{
+.btn-x {
   background: none;
   border: none;
   cursor: pointer;
   font-size: 16px;
   color: #181717;
-  padding:5px;
+  padding: 5px;
 }

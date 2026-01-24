@@ -136,7 +136,7 @@ function PersonalInfo({
         />
 
         <input
-          placeholder="Enter your total years of experience"
+          placeholder="⏳ Enter your total years of experience"
           value={formData.website}
           onChange={(e) =>
             setFormData({ ...formData, website: e.target.value })

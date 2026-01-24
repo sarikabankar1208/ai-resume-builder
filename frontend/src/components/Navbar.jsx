@@ -30,7 +30,7 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <h2 className="logo">AI Resume Builder</h2>
+      <h1 className="navbar-title">AI Powered Resume Builder</h1>
 
       <div className="auth-buttons">
         {!user ? (

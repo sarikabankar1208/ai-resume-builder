@@ -6,14 +6,15 @@ function Skills({ formData, setFormData, setCurrentStep }) {
   const [skillInput, setSkillInput] = useState("");
   const skills = formData.skills || [];
 
-  // ✅ Toast state
+  // Toast state
   const [showToast, setShowToast] = useState(false);
   const [toastType, setToastType] = useState(""); // success | error
 
-  // ✅ get resumeId ONCE (required)
+  // Get resumeId from URL
   const [searchParams] = useSearchParams();
   const resumeId = searchParams.get("resumeId");
 
+  /* ---------------- ADD SKILL ---------------- */
   const addSkill = () => {
     if (!skillInput.trim()) return;
 
@@ -27,6 +28,7 @@ function Skills({ formData, setFormData, setCurrentStep }) {
     setSkillInput("");
   };
 
+  /* ---------------- REMOVE SKILL ---------------- */
   const removeSkill = (skillToRemove) => {
     setFormData({
       ...formData,
@@ -34,7 +36,7 @@ function Skills({ formData, setFormData, setCurrentStep }) {
     });
   };
 
-  // ✅ SAVE SKILLS TO DATABASE (FIXED)
+  /* ---------------- SAVE SKILLS ---------------- */
   const saveSkills = async () => {
     try {
       const { data, error: userError } = await supabase.auth.getUser();
@@ -57,7 +59,6 @@ function Skills({ formData, setFormData, setCurrentStep }) {
       setToastType(error ? "error" : "success");
       setShowToast(true);
       setTimeout(() => setShowToast(false), 2000);
-
     } catch (err) {
       console.error(err);
       setToastType("error");
@@ -83,49 +84,70 @@ function Skills({ formData, setFormData, setCurrentStep }) {
 
       {/* ---------- HEADER ---------- */}
       <h2>Skills</h2>
-      <p className="tip-text">Add your technical and soft skills</p>
+      <p className="form-subtitle">
+        Add your technical and soft skills
+      </p>
 
       {/* ---------- INPUT ---------- */}
       <div className="skills-input-row">
         <input
+          type="text"
           placeholder="Enter a skill (e.g., JavaScript, Project Management)"
           value={skillInput}
           onChange={(e) => setSkillInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && addSkill()}
         />
 
-        <button className="add-skill-btn" onClick={addSkill}>
+        <button
+          className="add-skill-btn"
+          onClick={addSkill}
+          disabled={!skillInput.trim()}
+        >
           + Add
         </button>
       </div>
 
+      {/* ---------- EMPTY STATE ---------- */}
+      {skills.length === 0 && (
+        <div className="skills-empty">
+          <div className="skills-empty-icon">✨</div>
+          <p className="skills-empty-title">No skills added yet.</p>
+          <p className="skills-empty-sub">
+            Add your technical and soft skills above.
+          </p>
+        </div>
+      )}
+
       {/* ---------- SKILL TAGS ---------- */}
-      <div className="skills-tags">
-        {skills.map((skill, index) => (
-          <span key={index} className="skill-tag">
-            {skill}
-            <button
-              className="btn-x"
-              onClick={() => removeSkill(skill)}
-            >
-              ×
-            </button>
-          </span>
-        ))}
-      </div>
+      {skills.length > 0 && (
+        <div className="skills-tags">
+          {skills.map((skill, index) => (
+            <span key={index} className="skill-tag">
+              {skill}
+              <button
+                className="btn-x"
+                onClick={() => removeSkill(skill)}
+              >
+                ×
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
 
       {/* ---------- TIP ---------- */}
-      <div className="tip-text">
+      <div className="tip-text-below">
         <strong>Tip:</strong> Add 8–12 relevant skills. Include both technical
         skills (programming languages, tools) and soft skills (leadership,
         communication).
       </div>
 
+      {/* ---------- SAVE ---------- */}
       <button className="save-btn" onClick={saveSkills}>
         Save Changes
       </button>
 
-      {/* ✅ TOAST */}
+      {/* ---------- TOAST ---------- */}
       {showToast && (
         <div className={`toast ${toastType}`}>
           {toastType === "success"
