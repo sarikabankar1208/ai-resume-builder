@@ -91,7 +91,7 @@ The system follows a **modular, scalable architecture**:
 ## 🌐 Live Demo
 
 **Deployed Frontend:**  
-https://ai-powered-resume-builder-r3avdw2va.vercel.app/
+https://ai-resume-builder-1it0j9tgq-sarika-ravindra-bankars-projects.vercel.app
 
 ---
 
