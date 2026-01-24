@@ -73,7 +73,8 @@ The system follows a **modular, scalable architecture**:
 ## 📊 Results & Output
 
 -  Fully functional resume builder  
--  AI-generated professional summaries  
+-  AI-generated professional summaries
+-  AI-generated job descriptions
 -  Resume persistence after login/logout  
 -  Dashboard with saved resumes  
 -  Edit and delete functionality  
