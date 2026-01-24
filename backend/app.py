@@ -4,7 +4,6 @@ Main application entry point for the backend server.
 # from dotenv import load_dotenv
 # load_dotenv()
 
-
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from datetime import datetime
@@ -16,7 +15,7 @@ from routes.ai_routes import ai_bp
 app = Flask(__name__)
 CORS(
     app,
-    resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173"]}},
+    resources={r"/*": {"origins": ["http://localhost:5173", "http://127.0.0.1:5173", "https://ai-resume-builder-sable-beta.vercel.app"]}},
     supports_credentials=True
 )
 
