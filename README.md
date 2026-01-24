@@ -25,7 +25,8 @@ All in a **beginner-friendly web interface**.
 
 ## ✨ Key Features
 
-- 🧠 **AI-Generated Professional Summary**  
+- 🧠 **AI-Generated Professional Summary**
+- 🧠 **AI-Generated Job Description**
 - 📝 **Step-by-Step Resume Form**  
 - 👀 **Live Resume Preview**  
 - 💾 **Save, Edit & Delete Resumes**  
