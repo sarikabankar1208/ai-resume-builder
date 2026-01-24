@@ -1,9 +1,11 @@
 from flask import Blueprint, request, jsonify
+from flask_cors import CORS
 import os
 import google.generativeai as genai
 
 # Create Blueprint
 ai_bp = Blueprint("ai_bp", __name__)
+CORS(ai_bp)
 
 # Configure Gemini
 genai.configure(api_key=os.getenv("gemini_resume_builder_api_key"))
