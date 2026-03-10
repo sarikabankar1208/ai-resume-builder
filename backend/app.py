@@ -29,6 +29,7 @@ CORS(app, resources={
             "https://ai-resume-builder-sable-beta.vercel.app",
             "http://127.0.0.1:5173",
             "http://localhost:5173",
+            "https://ai-resume-builder-1it0j9tgq-sarika-ravindra-bankars-projects.vercel.app",
             "*"  # Allow all origins (less secure but works)
         ],
         "methods": ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
