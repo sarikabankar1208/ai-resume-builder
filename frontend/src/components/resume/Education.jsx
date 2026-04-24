@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../../supabaseClient";
 import { useSearchParams } from "react-router-dom";
-
 function Education({ formData, setFormData, setCurrentStep }) {
   const educationList = formData.education || [];
 
@@ -106,7 +105,7 @@ function Education({ formData, setFormData, setCurrentStep }) {
       {/* ---------- HEADER ---------- */}
       <div className="experience-header">
         <div>
-          <h2>Education</h2>
+          <h2 style={{textAlign:"left", fontSize:"25px"}}>Education </h2>
           <p className="tip-text">Add your education details</p>
         </div>
 
@@ -184,11 +183,15 @@ function Education({ formData, setFormData, setCurrentStep }) {
       {/* ---------- EMPTY STATE ---------- */}
       {educationList.length === 0 && (
         <div className="experience-empty">
+
           <div className="experience-icon">🎓</div>
+
           <p className="empty-title">No education added yet.</p>
+
           <p className="empty-sub">
             Click "Add Education" to get started.
           </p>
+          
         </div>
       )}
 

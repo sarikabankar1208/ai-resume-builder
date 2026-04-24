@@ -1,0 +1,41 @@
+/* Download Button */
+.download-btn {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Hover effect */
+.download-btn:hover {
+  background-color: #15532f; /* darker green */
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Hover effect */
+.delete-btn:hover {
+  background-color: #6b2219; /* darker red */
+} 

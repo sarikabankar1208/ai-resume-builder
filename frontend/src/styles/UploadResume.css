@@ -1,0 +1,75 @@
+/* Page Container */
+.upload-container {
+  padding: 40px 20px;
+  text-align: center;
+  width: 1000px;
+  height: 800px;
+}
+
+/* Title */
+.upload-title {
+  font-size: 32px;
+  width: 100%;
+  text-align: center; 
+  margin-left: 280px;
+  margin-top: 20px;
+}
+
+/* Center Box */
+.upload-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* Main Card */
+.upload-card {
+  width: 440px; 
+  margin-top: 80px;  
+  margin-left: 550px;           
+  border: 2px dashed #c7d2fe;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  padding: 30px;
+  align-content: center;
+}
+
+/* File Input */
+.upload-card input {
+  padding: 8px;
+  font-size: 18px;
+  margin-left: 65px;
+}
+
+.upload-card p {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+/* Button */
+.upload-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #222;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.upload-btn:hover {
+  background: #000;
+}
+
+.upload-btn:disabled {
+  background: #888;
+  cursor: not-allowed;
+}

@@ -1,58 +1,86 @@
+.features {
+  font-family: Arial, sans-serif;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 40px;
-  background-color: #1f1f1f;
+  background: #111;
+  padding: 15px 35px;
+  color: white;
 }
 
 .navbar-title {
-  color: #ffffff;
-  font-size: 40px;
-  font-weight: 500;
+  font-size: 30px;
+  font-weight: bold;
 }
 
-.logout-btn {
-  background: transparent;
-  color: #ffffff;
-  border: 1px solid #ffffff;
-  padding: 8px 18px;
-  border-radius: 6px;
-  cursor: pointer;
+.nav-links {
+  display: flex;
+  gap: 20px;
 }
 
+.nav-item {
+  text-decoration: none;
+  color: #ddd;
+  font-size: 20px;
+  transition: 0.3s;
+}
+
+.nav-item:hover {
+  color: #fff;
+}
+
+.highlight {
+  color: #e5e2e9;;
+  font-weight: bold;
+}
 
 .auth-buttons {
   display: flex;
-  gap: 40px;              /* spacing between buttons */
-  align-items: center;
+  gap: 10px;
 }
-
 
 .auth-btn {
-  text-decoration: none;
-  background: transparent;
-  color: white;
-  border: 1.5px solid white;
   padding: 8px 18px;
-  border-radius: 6px;
-  font-size: 22px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-
-.auth-btn:hover {
-  background: white;
-  color: #1e1e1e;
-}
-
-.auth-btn.outline {
-  border-color: #9b59ff;   /* purple accent */
-  color: #9b59ff;
-}
-
-.auth-btn.outline:hover {
-  background: #9b59ff;
+  border: 1px solid #e5e2e9;
+  background: #222;
   color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Outline version */
+.auth-btn.outline {
+  background: transparent;
+  color: #e5e2e9;
+}
+
+/* SAME hover effect for BOTH */
+.auth-btn:hover {
+  background: #f2ecec;
+  color: #0f0e0e;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+}
+
+/* Click effect */
+.auth-btn:active {
+  transform: scale(0.96);
+}
+
+.nav-item.active {
+  color: #e5e2e9;
+  font-weight: bold;
+  border-bottom: 2px solid #e5e2e9;
+}
+
+.highlight {
+  color: #e5e2e9;
 }

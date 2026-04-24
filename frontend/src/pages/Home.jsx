@@ -1,28 +1,23 @@
-import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
-import "../styles/Navbar.css";
+import Hero from "../components/Hero";
+import Steps from "../components/Steps";
+import Features from "../components/Features1";
+import Feedback from "../components/Feedback1";
+import FAQ from "../components/FAQ";
+import CTA from "../components/CTA";
+import Footer from "../components/Footer";
 
 function Home() {
-  const navigate = useNavigate();
-
   return (
-    <div className="home-container">
-      <h1>Build resumes that support real careers, not shortcuts.</h1>
-
-      <p>
-        An AI-powered resume builder focused on helping individuals communicate
-        their skills clearly, access fair opportunities, and grow sustainably.
-      </p>
-
-      <div className="home-buttons">
-        <button
-          className="primary-btn"
-          onClick={() => navigate("/login")}
-        >
-          Get Started
-        </button>
-      </div>
-    </div>
+    <>
+      <Hero />
+      <Steps />
+      <Features />
+      <Feedback />
+      <FAQ />
+      <CTA />
+      <Footer />
+    </>
   );
 }
 

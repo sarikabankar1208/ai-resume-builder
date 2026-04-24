@@ -1,0 +1,79 @@
+/* Container */
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card (BIGGER) */
+.auth-card {
+  background: #fff;
+  padding: 30px 30px;   /* increased */
+  width: 480px;         /* increased from 360 */
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(164, 153, 153, 0.858);
+  text-align: center;
+}
+
+/* Heading */
+.auth-card h2 {
+  margin-bottom: 10px;
+  font-size: 26px;   /* bigger */
+}
+
+.auth-card p {
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 20px;
+}
+
+/* Inputs (BIGGER) */
+.auth-card input {
+  width: 100%;
+  padding: 14px;     /* increased */
+  margin-bottom: 18px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+/* Focus */
+.auth-card input:focus {
+  border-color: #333;
+}
+
+/* Button (BIGGER) */
+.auth-card button {
+  width: 100%;
+  padding: 14px;     /* increased */
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.auth-card button:hover {
+  background: #000;
+}
+
+/* Message */
+.info {
+  margin-top: 12px;
+  font-size: 14px;
+  color: green;
+}
+
+/* Switch text */
+.switch-text {
+  margin-top: 18px;
+  font-size: 15px;
+}
+
+.switch-text a {
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+}

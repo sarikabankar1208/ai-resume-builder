@@ -1,0 +1,68 @@
+.features {
+  font-family: Arial, sans-serif;
+}
+
+/* Hero Section */
+.features-hero {
+  background: linear-gradient(to right, #8e869c, #8b8293);
+  color: white;
+  text-align: center;
+  padding: 70px 20px;
+}
+
+.features-hero h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.features-hero p {
+  font-size: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.features-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* 👈 FIX */
+  padding: 50px 80px;
+  gap: 30px;
+  background: linear-gradient(to right, #a09caa, #a09caa);
+}
+
+/* Feature Card */
+.feature-card {
+  background: rgb(222, 217, 217);
+  padding: 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  width: 100%;
+  
+}
+
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  
+}
+
+.feature-card h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.feature-card p {
+  color: #555;
+  line-height: 1.6;
+}
+
+@media (max-width: 992px) {
+  .features-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .features-container {
+    grid-template-columns: 1fr;
+  }
+}

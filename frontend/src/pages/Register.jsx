@@ -1,60 +1,116 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "../supabaseClient";
-import "../styles/Auth.css";
+import "../styles/Register.css";
 
 function Register() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setMessage("");
 
-    const { error } = await supabase.auth.signUp({
+    // Step 1: Sign up user
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
 
+    // Handle auth error
     if (error) {
-      setMessage(error.message);
-    } else {
-      setMessage("Registration successful! Check your email.");
+      if (error.message.includes("already registered")) {
+        setMessage("User already exists. Please login.");
+      } else {
+        setMessage(error.message);
+      }
+      return;
     }
+
+    const user = data.user;
+
+    // If email confirmation is ON
+    if (!user) {
+      setMessage("Check your email to confirm registration.");
+      return;
+    }
+
+    // Step 2: Insert or Update profile (FIXED using UPSERT)
+    const { error: profileError } = await supabase
+      .from("profiles")
+      .upsert(
+        [
+          {
+            id: user.id,
+            name: name,
+            email: user.email,
+            role: "user",
+          },
+        ],
+        { onConflict: "id" }
+      );
+
+    if (profileError) {
+      console.error("Profile Error:", profileError.message);
+      setMessage("Profile setup failed. Try again.");
+      return;
+    }
+
+    // Success
+    setMessage("Registration successful!");
+
+    // Reset form
+    setName("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
-    <div className="auth-card">
-      <h2>Register</h2>
-      <p>Create your account</p>
+    <div className="auth-container">
+      <div className="auth-card">
 
-      <form onSubmit={handleRegister}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <h2>Create Account</h2>
+        <p>Start building your professional resume</p>
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <form onSubmit={handleRegister}>
 
-        <button type="submit">Register</button>
-      </form>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
 
-      {message && <p className="info">{message}</p>}
+          <input
+            type="email"
+            placeholder="Email Address"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-      
-      <p className="switch-text">
-        Already have an account?{" "}
-        <Link to="/login">Click here</Link>
-      </p>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+
+          <button type="submit">Create Account</button>
+
+        </form>
+
+        {message && <p className="info">{message}</p>}
+
+        <p className="switch-text">
+          Already have an account? <Link to="/login">Login</Link>
+        </p>
+
+      </div>
     </div>
   );
 }

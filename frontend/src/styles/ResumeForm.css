@@ -6,8 +6,8 @@
 /* Page wrapper for entire resume builder page*/
 .resume-builder-page {
   padding: 30px 40px;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 /* Back to dashboard link */
@@ -348,7 +348,7 @@
 
 .input-text {
   border-radius: 8px;
-  height: 22px;
+  height: 34px;
   padding: 5px;
   font-size: 1rem;
   border-color: #eaedf2;

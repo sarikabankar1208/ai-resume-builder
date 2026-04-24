@@ -1,0 +1,44 @@
+/* Footer */
+.footer {
+  width: 100%;
+  background: #111;
+  color: white;
+  padding: 40px 0;
+}
+
+/* Center content */
+.footer-content {
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+}
+
+/* Links */
+.footer-links {
+  display: flex;
+  justify-content: center;   /* ✅ center horizontally */
+  gap: 100px;                 /* ✅ space between links */
+  margin-bottom: 15px;
+}
+
+/* Link style */
+.footer-links a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+/* 🔥 UNDERLINE ON HOVER */
+.footer-links a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Bottom text */
+.footer-text {
+  font-size: 18px;
+  color: #aaa;
+}

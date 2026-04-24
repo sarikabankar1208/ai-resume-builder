@@ -1,4 +1,4 @@
-import { formatBulletPoints } from "../../../utils/formatBullets"; // ✅ ADD THIS IMPORT
+import { formatBulletPoints } from "../../../utils/formatBullets"; // ADD THIS IMPORT
 
 //Helper to format YYYY-MM → Mon YYYY
 const formatMonthYear = (value) => {
@@ -11,9 +11,12 @@ const formatMonthYear = (value) => {
   ];
 
   return `${monthNames[parseInt(month, 10) - 1]} ${year}`;
+
 };
 
 function ClassicTemplate({ formData, accent }) {
+    console.log("FULL FORM DATA:", formData);
+    console.log("EDUCATION DATA:", formData.education);
   return (
     <div className={`resume-preview-inner ${accent}`}>
       {/* HEADER */}
@@ -21,7 +24,7 @@ function ClassicTemplate({ formData, accent }) {
         {formData.fullName || "Your Name"}
       </h1>
       <h3 className="preview-profession">
-        {formData.profession || "Professional"}
+        {formData.profession || formData.role || " "}
       </h3>
 
       <div className="preview-contact">
@@ -45,7 +48,7 @@ function ClassicTemplate({ formData, accent }) {
         </div>
       )}
 
-      {/* ✅ PROFESSIONAL EXPERIENCE - UPDATED WITH BULLETS */}
+      {/* PROFESSIONAL EXPERIENCE - UPDATED WITH BULLETS */}
       {formData.experiences?.length > 0 && (
         <div className="preview-section">
           <h3 className="preview-section-title">
@@ -56,7 +59,7 @@ function ClassicTemplate({ formData, accent }) {
             <div key={index} className="preview-experience">
               {/* Job Title & Duration */}
               <div className="preview-exp-header">
-                <strong>{exp.role || "Job Title"}</strong>
+                <strong style={{fontSize: "15px"}}>{exp.role || "Job Title"}</strong>
                 <span className="preview-exp-dates">
                   {formatMonthYear(exp.startDate)} –{" "}
                   {exp.current ? "Present" : formatMonthYear(exp.endDate)}
@@ -68,7 +71,7 @@ function ClassicTemplate({ formData, accent }) {
                 {exp.company || "Company Name"}
               </div>
 
-              {/* ✅ DESCRIPTION AS BULLET POINTS */}
+              {/* DESCRIPTION AS BULLET POINTS */}
               {exp.description && (
                 <ul className="preview-exp-bullets">
                   {formatBulletPoints(exp.description).map((bullet, idx) => (
@@ -89,11 +92,11 @@ function ClassicTemplate({ formData, accent }) {
           {formData.education.map((edu, index) => (
             <div key={index} className="preview-education">
               <div className="preview-edu-header">
-                <strong>{edu.degree} in {edu.field}</strong>
+                <p style={{fontWeight: "350"}}> <strong>{edu.degree} in {edu.field} </strong> </p>
                 <span>{formatMonthYear(edu.passingDate)}</span>
               </div>
-              <div className="preview-edu-college">{edu.college}</div>
-              {edu.gpa && <div className="preview-edu-gpa">GPA: {edu.gpa}</div>}
+              <div className="preview-edu-college">{edu.college}</div> 
+              <div className="preview-edu-gpa"> GPA: {edu.gpa}</div>
             </div>
           ))}
         </div>

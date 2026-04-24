@@ -83,7 +83,7 @@ function Skills({ formData, setFormData, setCurrentStep }) {
       </div>
 
       {/* ---------- HEADER ---------- */}
-      <h2>Skills</h2>
+      <h2 style={{ textAlign: "left", fontSize:"25px" }}>Skills</h2>
       <p className="form-subtitle">
         Add your technical and soft skills
       </p>

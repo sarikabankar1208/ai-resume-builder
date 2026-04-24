@@ -1,0 +1,97 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.feedback {
+  font-family: Arial, sans-serif;
+}
+
+/* Hero */
+.feedback-hero {
+  background: linear-gradient(to right, #8e869c, #8b8293);
+  color: white;
+  text-align: center;
+  padding: 25px;
+}
+
+.feedback-hero h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.feedback-hero p {
+  font-size: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* Container */
+.feedback-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background: #f9f9f9;
+}
+
+/* Form */
+.feedback-form {
+  background: white;
+  padding: 30px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 18px;
+}
+
+/* Inputs */
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 5px;
+}
+
+/* Stars */
+.stars {
+  display: flex;
+  gap: 8px;
+  font-size: 24px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.star {
+  color: #ccc;
+}
+
+.star.active {
+  color: gold;
+}
+
+/* Button */
+.feedback-form button {
+  width: 100%;
+  padding: 12px;
+  background: #8b8293;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.feedback-form button:hover {
+  opacity: 0.9;
+}

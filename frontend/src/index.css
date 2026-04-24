@@ -1,6 +1,36 @@
-/* Base styles reset */
-body {
+/* Reset + Base */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Body styling */
+body {
+  line-height: 1.6;
+  background-color: #f9fafb;
+  color: #1f2937;
+}
+
+/* Buttons (global style) */
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  display: block;
+}

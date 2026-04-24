@@ -178,7 +178,7 @@ function ProfessionalExperience({
       {/* ---------- HEADER ---------- */}
       <div className="experience-header">
         <div>
-          <h2>Professional Experience</h2>
+          <h2 style={{textAlign:"left", fontSize:"25px"}}>Professional Experience</h2>
           <p className="tip-text">Add your job experience</p>
         </div>
 

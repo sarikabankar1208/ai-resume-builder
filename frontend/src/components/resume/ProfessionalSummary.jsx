@@ -121,7 +121,7 @@ function ProfessionalSummary({ formData, setFormData, setCurrentStep }) {
       {/* ---------- HEADER ---------- */}
       <div className="summary-header">
         <div>
-          <h2>Professional Summary</h2>
+          <h2 style={{textAlign:"left", fontSize:"25px"}}>Professional Summary</h2>
           <p className="tip-text">Add summary for your resume here</p>
         </div>
 

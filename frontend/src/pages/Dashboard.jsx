@@ -14,6 +14,7 @@ function Dashboard() {
   useEffect(() => {
     fetchResumes();
   }, []);
+  
 
   const fetchResumes = async () => {
     const { data: auth } = await supabase.auth.getUser();
@@ -55,15 +56,21 @@ function Dashboard() {
     navigate(`/resume-builder?resumeId=${data.id}`);
   };
 
-  /* 🔹 DELETE */
+  /* DELETE RESUME */
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this resume?")) return;
-
-    await supabase.from("resumes").delete().eq("id", id);
-    setResumes((prev) => prev.filter((r) => r.id !== id));
+    if (!window.confirm("Are you sure you want to delete this resume?")) return;  
+    const { data: auth } = await supabase.auth.getUser();  
+    if (!auth?.user) return;  
+    await supabase  
+      .from("resumes")  
+      .delete()  
+      .eq("id", id)  
+      .eq("user_id", auth.user.id);  
+    setResumes((prev) => prev.filter((r) => r.id !== id)); 
   };
 
-  /* 🔹 EDIT */
+
+  /* 🔹 EDIT RESUME */
   const handleEdit = (id) => {
     navigate(`/resume-builder?resumeId=${id}`);
   };
@@ -73,18 +80,25 @@ function Dashboard() {
       <p className="dashboard-title">
         You can now build and optimize your resume
       </p>
+    
+    {/* ACTION CARDS */} 
+    <div className="dashboard-actions">
 
-      {/* CREATE RESUME */}
-      <div className="dashboard-actions">
-        <div
-          className="dashboard-card"
-          onClick={() => setShowModal(true)}
-          style={{ cursor: "pointer" }}
-        >
-          <span>+</span>
-          <p>Create Resume</p>
-        </div>
+      {/* CREATE NEW RESUME */}
+      <div className="dashboard-card" onClick={() => setShowModal(true)} style={{ cursor: "pointer" }}>
+        <span>+</span>
+        <p>Create New Resume</p>
       </div>
+
+      {/* UPLOAD EXISTING RESUME */}
+      <div className="dashboard-card" onClick={() => navigate("/upload-resume")} style={{ cursor: "pointer" }}>
+        <span>📤</span>
+        <p>Upload Resume</p>
+      </div>
+
+    </div>
+
+      
 
       {/* RESUME LIST */}
       <div className="resume-list">

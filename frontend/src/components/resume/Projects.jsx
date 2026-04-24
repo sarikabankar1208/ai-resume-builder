@@ -84,7 +84,7 @@ function Projects({ formData, setFormData, setCurrentStep }) {
       {/* ---------- HEADER ---------- */}
       <div className="experience-header">
         <div>
-          <h2>Projects</h2>
+          <h2 style={{ textAlign: "left",fontSize:"25px" }}>Projects</h2>
           <p className="tip-text">Add projects you have worked on</p>
         </div>
 

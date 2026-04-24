@@ -1,0 +1,41 @@
+.hero-section {
+  height: 90vh;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay {
+  background: rgba(0,0,0,0.6);
+  padding: 40px;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+}
+
+.overlay p{
+  font-size: 18px;
+  margin-top: 24px;
+}
+
+.hero-buttons button {
+  margin: 10px;
+  padding: 12px 20px;
+  border: none;
+  background: #7c3aed;
+  color: white;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+.secondary-btn {
+  background: #14b8a6;
+}
+
+.hero-features span {
+  margin: 10px;
+  display: inline-block;
+}

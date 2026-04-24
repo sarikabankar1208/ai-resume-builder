@@ -7,14 +7,18 @@
 .resume-preview {
   background: #ffffff;
   border-radius: 12px;
-  padding: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
   min-height: 500px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.16);
 }
 
 /* Base preview wrapper */
 .resume-preview-inner {
-  padding: 24px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
   border-radius: 12px;
 }
 
@@ -26,7 +30,7 @@
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 10px;
-  text-transform: uppercase; /* 🔥 NAME ALWAYS UPPERCASE */
+  text-transform: uppercase; /* NAME ALWAYS UPPERCASE */
 }
 .preview-profession{
   text-align: center;
@@ -91,24 +95,25 @@
   color: black;
 }
 
+
 .preview-exp-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 14px;
-  font-weight: 600;
-  color: black;
+  font-weight:400;
 }
 
 .preview-exp-dates {
   font-size: 12px;
   color: #666;
-  font-weight: normal;
   font-style: italic;
+  margin-left: 500px;
 }
 
 .preview-exp-company {
-  margin-top: 10px;
   font-size: 14px;
+  margin-top: 8px;
   margin-bottom: 6px;
   color: #666;
 }
@@ -145,14 +150,13 @@
   color: black;
 }
 
-.preview-edu-header {
+.preview-edu-header{
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  font-weight: 600;
   color: black;
+  
 }
-
 .preview-edu-college {
   font-size: 14px;
   margin: 4px 0;
@@ -173,7 +177,7 @@
 }
 
 .preview-project-title {
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 4px;
   color: black;
 }
@@ -195,7 +199,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 150;
 }
 
 .preview-edu-college {
@@ -242,7 +246,6 @@
 }
 
 /* Buttons */
-.share-btn,
 .download-btn {
   padding: 6px 14px;
   font-size: 14px;
@@ -253,9 +256,16 @@
   margin-bottom: 5px;
 }
 
-.share-btn:hover,
-.download-btn:hover {
-  background: #eee;
+.share-btn {
+  padding: 6px 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #6d5b5b;
+  background:#356ce2d8;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 5px;
 }
 
 /* ---------- PROGRESS BAR ---------- */
@@ -290,51 +300,6 @@
   width: 100%;
 }
 
-/* ===============================
-   SHARE MODAL OVERLAY
-================================ */
-.share-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-/* ===============================
-   SHARE MODAL BOX
-================================ */
-.share-popup {
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
-  min-width: 260px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  text-align: center;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-}
-
-/* Share modal buttons */
-.share-popup button {
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  background: #f9f9f9;
-}
-
-.share-popup button:hover {
-  background: #eee;
-}
-
 /* Close button */
 .close-btn {
   background: #ddd;
@@ -355,43 +320,96 @@
   page-break-inside: avoid;
 }
 
-/* ================= PRINT MODE ================= */
+/* ================= PAGE SETUP ================= */
+@page {
+  size: A4;
+  margin: 5mm;   /* 🔥 minimal outer margin */
+}
+
+/* ================= PRINT STYLES ================= */
 @media print {
 
-  /* Hide EVERYTHING */
+  /* Hide everything except resume */
   body * {
     visibility: hidden;
   }
 
-  /* Show ONLY resume */
   #resume-preview,
   #resume-preview * {
     visibility: visible;
   }
 
-  /* Position resume at top-left */
+  /* Main resume container */
   #resume-preview {
     position: absolute;
-    left: 0;
     top: 0;
-    width: 100%;
+    left: 0;
+
+    width: 210mm;
+    min-height: 297mm;
+
+    margin: 0;              /* 🔥 remove center spacing */
+    padding: 5mm 8mm;      /* 🔥 optimized inner spacing */
+
+    box-sizing: border-box;
   }
 
-  /* A4 page setup */
-  @page {
-    size: A4;
-    margin: 20mm;
-  }
-
-  /* Prevent section breaking */
-  .preview-section {
+  /* Prevent breaking inside sections */
+  .preview-section,
+  .preview-experience,
+  .preview-education,
+  .preview-project {
     page-break-inside: avoid;
+    break-inside: avoid;
   }
 
+  /* 🔥 FIX HEADER ALIGNMENT (no shifting) */
+  .preview-exp-header {
+    display: block !important;
+  }
+
+  .preview-exp-header strong {
+    display: inline-block;
+  }
+
+  .preview-exp-header span {
+    float: right;
+  }
+
+  /* Clear float */
+  .preview-exp-header::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  /* Bullet alignment */
+  .preview-exp-bullets {
+    margin-left: 15px;
+  }
+
+  /* Avoid awkward page breaks */
   h1, h2, h3 {
     page-break-after: avoid;
   }
+
+  ul, p {
+    page-break-inside: avoid;
+  }
+
+  /* Improve print quality */
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  /* Hide buttons / UI */
+  button,
+  .no-print {
+    display: none !important;
+  }
 }
-
-
-

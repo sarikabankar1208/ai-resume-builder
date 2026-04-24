@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
+import html2pdf from "html2pdf.js";
 import jsPDF from "jspdf";
-
 import { supabase } from "../supabaseClient";
-
 import PersonalInfo from "../components/resume/PersonalInfo";
 import ProfessionalSummary from "../components/resume/ProfessionalSummary";
 import ProfessionalExperience from "../components/resume/ProfessionalExperience";
@@ -12,7 +12,6 @@ import Education from "../components/resume/Education";
 import Projects from "../components/resume/Projects";
 import Skills from "../components/resume/Skills";
 import ResumePreview from "../components/resume/ResumePreview";
-
 import "../styles/ResumeForm.css";
 import "../styles/ResumePreview.css";
 
@@ -20,15 +19,14 @@ function ResumeBuilder() {
   const [searchParams] = useSearchParams();
   const resumeId = searchParams.get("resumeId");
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 6;
-
   const [activePanel, setActivePanel] = useState(null);
   const [accent, setAccent] = useState("blue");
   const [template, setTemplate] = useState("classic");
-
   const [showShare, setShowShare] = useState(false);
+  const mode = location.state?.mode || "manual";
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -79,6 +77,103 @@ function ResumeBuilder() {
     fetchResume();
   }, [resumeId]);
 
+  const parseExperience = (item) => {
+    if (typeof item !== "string") return item;
+
+    const lines = item.split("\n").map(line => line.trim()).filter(Boolean);
+    const header = lines[0] || "";
+    const body = lines.slice(1);
+
+    // "Software Engineer | Morningstar Jun 2025 – Present" or
+    // "SOFTWARE ENGINEER - Morningstar Jun 2025 – present"
+    const [titlePart, restPart] = header.split(/[-|]/).map(s => s.trim());
+    const [company, ...dateParts] = (restPart || "").split(/(?<=\w)\s+(?=\d)|\s+–\s+/); // flexible split
+    const dateStr = dateParts.length ? dateParts.join(" ").trim() : "";
+
+    return {
+      jobTitle: titlePart || "Job Title",
+      companyName: company || "Company Name",
+      duration: dateStr,
+      description: body,
+    };
+  };
+
+  const parseGenericList = (arr, fallbackKey = "text") => {
+    if (!Array.isArray(arr)) return [];
+    return arr.map(item => {
+      if (typeof item === "string") return { [fallbackKey]: item };
+      return item;
+    });
+  };
+
+  useEffect(() => {
+    if (mode !== "upload") return;  // SAFETY CHECK
+    if (!location.state?.parsedData) return;
+
+    const data = location.state.parsedData;
+
+    console.log("UPLOAD MODE DATA:", data);
+
+    setFormData((prev) => ({
+      ...prev,
+
+      fullName: data.personal_info?.fullName || "",
+      email: data.personal_info?.email || "",
+      phone: data.personal_info?.phone || "",
+      location: data.personal_info?.location || "",
+
+      skills: data.skills || [],
+
+      // NEW CLEAN PARSER
+      experiences: data.experience?.map((exp) => {
+        const clean = exp.replace(/\s+/g, " ").trim();
+
+        const lines = clean
+          .split(/[\.\•]/)
+          .map(l => l.trim())
+          .filter(Boolean);
+
+        const header = lines[0] || "";
+
+        let role = "";
+        let company = "";
+
+        const parts = header.split("-");
+
+        if (parts.length >= 2) {
+          role = parts[0].trim();
+          company = parts[1].trim();
+        } else {
+          role = header;
+        }
+
+        return {
+          role: role,
+          company: company,
+          startDate: "",
+          endDate: "",
+          current: false,
+          description: lines.slice(1)
+        };
+      }) || [],
+
+      education: data.education?.map((edu) => ({
+        degree: edu.degree || "",
+        field: edu.field || "",
+        college: edu.college || "",
+        passingDate: edu.passingDate || "",
+        gpa: edu.gpa || ""
+      })) || [],
+
+      projects: data.projects?.map((proj) => ({
+        title: proj,
+        description: ""
+      })) || []
+
+    }));
+
+  }, [location.state, mode]);
+
   /* =========================
      🔹 SAVE (CREATE / UPDATE)
      ========================= */
@@ -127,31 +222,10 @@ function ResumeBuilder() {
     navigate("/dashboard");
   };
 
-  /* DOWNLOAD */
   const handleDownload = () => {
     window.print();
   };
-
-  /* SHARE */
-  const handleShare = () => setShowShare(true);
-
-  const shareWhatsApp = () => {
-    window.open(
-      `https://wa.me/?text=${encodeURIComponent("Check out my resume")}`,
-      "_blank"
-    );
-  };
-
-  const shareEmail = () => {
-    window.location.href =
-      "mailto:?subject=My Resume&body=Please check my resume.";
-  };
-
-  const copyLink = async () => {
-    await navigator.clipboard.writeText(window.location.href);
-    alert("Link copied!");
-  };
-
+    
   return (
     <div className="resume-builder-page">
       {/* PROGRESS BAR */}
@@ -247,21 +321,6 @@ function ResumeBuilder() {
           </div>
         </div>
       </div>
-
-      {/* SHARE MODAL */}
-      {showShare && (
-        <div className="share-overlay">
-          <div className="share-popup">
-            <h4>Share Resume</h4>
-            <button onClick={shareWhatsApp}>WhatsApp</button>
-            <button onClick={shareEmail}>Email</button>
-            <button onClick={copyLink}>Copy Link</button>
-            <button className="close-btn" onClick={() => setShowShare(false)}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

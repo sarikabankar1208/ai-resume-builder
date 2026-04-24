@@ -79,7 +79,7 @@ function PersonalInfo({
 
       {/* ---------- FORM ---------- */}
       <div className="form-header">
-        <h2>Personal Information</h2>
+        <h2 style={{textAlign:"left", fontSize:"25px"}}>Personal Information</h2>
       </div>
 
       <p className="form-subtitle">

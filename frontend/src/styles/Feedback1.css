@@ -1,0 +1,24 @@
+.feedback-section {
+  padding: 60px;
+  text-align: center;
+  background: #9e9b9b;
+}
+
+/* 🔥 CHANGE: use flex-wrap so multiple rows work */
+.feedback-container {
+  display: flex;
+  flex-wrap: wrap;              /* IMPORTANT */
+  justify-content: center;      /* better alignment */
+  gap: 20px;                   /* spacing between cards */
+  background: #656363;
+}
+
+/* 🔥 CHANGE: fix width so 3 per row */
+.feedback-card {
+  width: 30%;
+  padding: 30px;
+  border-radius: 8px;
+  font-size: 20px;
+  background: rgb(134, 127, 127);           /* optional for better UI */
+}
+
