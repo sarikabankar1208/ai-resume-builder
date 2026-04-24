@@ -143,13 +143,6 @@ The system follows a **modular and scalable architecture**:
 
 ---
 
-## 🚀 Deployment
-
-* **Frontend:** Vercel
-* **Backend:** PythonAnywhere
-
----
-
 ## 🔮 Future Enhancements
 
 * Multiple resume templates
