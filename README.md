@@ -150,12 +150,6 @@ The system follows a **modular and scalable architecture**:
 
 ---
 
-## 🌐 Live Demo
-
-👉 [https://ai-resume-builder-1it0j9tgq-sarika-ravindra-bankars-projects.vercel.app](https://ai-resume-builder-1it0j9tgq-sarika-ravindra-bankars-projects.vercel.app)
-
----
-
 ## 🔮 Future Enhancements
 
 * Multiple resume templates
