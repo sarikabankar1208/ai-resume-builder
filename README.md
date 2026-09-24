@@ -143,19 +143,6 @@ The system follows a **modular and scalable architecture**:
 
 ---
 
-## 🚀 Deployment
-
-
-## 🔗 Live Project Links
-
-- 🌐 Frontend (Vercel):  
-  https://ai-powered-resume-builder-i9t7l3nzs.vercel.app
-
-- ⚙️ Backend API (PythonAnywhere):  
-  https://sbankar1208.pythonanywhere.com
-
----
-
 ## 🔮 Future Enhancements
 
 * Multiple resume templates
